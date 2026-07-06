@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <title>html Events</title>
+</head>   
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>IMAGES</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="piano" src="https://i.pinimg.com/736x/e3/82/1c/e3821cf8bc9b8871d73eb85e67895610.jpg" alt="piano"></li>
+            <li><img width="200px" id="guitar" src="https://i.pinimg.com/736x/39/47/a9/3947a999450c930f4f6b6dc5a1bf22fc.jpg" alt="guitar"></li>
+            <li><img width="200px" id="swings" src="https://i.pinimg.com/736x/f6/bd/7b/f6bd7b2b40bdd356d243b856c743842a.jpg" alt="swings"></li>
+            <li><img width="200px" id="train" src="https://i.pinimg.com/736x/2a/eb/b9/2aebb9f16d7456b628b77e7307dc3613.jpg" alt="train"></li>
+            <li><img width="200px" id="horse" src="https://i.pinimg.com/736x/22/5d/78/225d78f6bdf82bed1a41144a1f69e1d5.jpg" alt="horse"></li>
+            <li><a style="color: aliceblue;" href=https://google.com id="google">Google</a></li>
+        </ul>
+    </div>
+</body> 
+<script>
+    // // document.getElementById('swings').onclick = function(){
+    // //     alert("swings clicked")
+    // // }
+    // // .......................................................................
+    // // EVENT LISTENER
+    // // best_approach
+    // // The first parameter is the name of the event as a string
+    // // The second parameter is the function that should run when the event occurs
+    // // The third parameter is boolean true/false but it is set to false as default
+    // document.getElementById('swings').addEventListener('click', function(){
+    //     alert("swings clicked")
+    // }) 
+    // // Event Object
+    // // e is the Event Object
+    // // It contains information about the event that just happened
+    // document.getElementById('swings').addEventListener('click', function(e){
+    //     console.log();
+    // }) 
+    // // type, timestamp, defaultPrevented
+    // document.addEventListener("click", function(e){
+    //     console.log(e.type); // tells what type of event happened
+    // });
+    // document.addEventListener("click", function(e){
+    //     console.log(e.timeStamp); //Returns the time (in milliseconds) since the page started loading when the event occurred
+    // });
+    // // returns true if preventDefault() has already been called otherwise false
+    // document.querySelector("images").addEventListener("click", function(e){
+    //     console.log(e.defaultPrevented); // false
+    //     e.preventDefault();
+    //     console.log(e.defaultPrevented); // true
+    // });
+    // // target: Returns the actual element that triggered the event
+    // // currentTarget: Returns the element where the event listener is attached 
+    // // toElement,, srcElement
+    // // clientX, clientY, screenX, screenY
+    // // altkey, ctrlkey, shiftkey, keyCode
+
+    // //Event Propogation
+    // //Event bubbling
+    // //bottom to top
+    // //event propogate inside to outside
+    // //first swings clicked will print and then clicked inside the ul
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // },false)
+    //  document.getElementById('swings').addEventListener('click', function(e){
+    //     console.log("swings clicked");
+    // },false)
+    // //Event capturing
+    // //top to bottom
+    // //first clicked inside the ul will print and then swings clicked
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // },true)
+    //  document.getElementById('swings').addEventListener('click', function(e){
+    //     console.log("swings clicked");
+    // },true)
+    // //stop propogation
+    // //event wont bubble and move to next event
+    // //in this case only swings clickeed will print
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // },false)
+    //  document.getElementById('swings').addEventListener('click', function(e){
+    //     console.log("swings clicked");
+    //     e.stopPropagation()
+    // },false)
+    // // prevent default
+    // // stops event from taking place
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault(); 
+    //     console.log("google clicked");
+    // },false)
+    
+    //..........................................................................
+    // Instead of adding a click event to every image individually
+    // we add ONE event listener to the parent <ul>
+    // This technique is called Event Delegation
+
+    document.querySelector('#images').addEventListener('click',function(e){
+        console.log(e.target.tagName); // tag name returns HTML tag name in uppercase
+        if(e.target.tagName === 'IMG'){
+    // parentNode gives us the parent element i.e <li> insteaf od only <img> so there isn't an empty bullet point left behind
+            let removeIt = e.target.parentNode
+            removeIt.remove()
+        }
+        // old way
+        //removeIt.parentNode.removeChild(removeIt)
+    })
+</script>
+</html>
