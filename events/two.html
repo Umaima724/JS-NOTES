@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>JS ASYNC DEMOS</h1> 
+   <button id ="stop">stop</button>
+</body> 
+<script>
+    // setTimeout() is not part of the JavaScript language.
+    // It is provided by the runtime environment (such as the browser's Web APIs or the Node.js runtime)
+    // When JavaScript calls setTimeout(), the runtime starts a timer
+    // Once the timer expires, the callback is placed in the Task Queue, and the Event Loop moves it to the Call Stack when the stack is empty
+    // This is what enables asynchronous behavior in JavaScript
+    setTimeout(function(){
+        console.log("Hello");
+    },2000)
+    const sayHello = function(){
+        console.log("Hello");
+    }
+    setTimeout(sayHello,2000) // pass by Reference
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = "JS - NOTES (ASYNC)"
+    }
+
+    // clearTimeout() cancels a scheduled setTimeout before it runs
+    // Stops a setTimeout using its timeout ID (reference)
+    const changeMe = setTimeout(changeText,5000)
+    
+    document.querySelector('#stop').addEventListener('click',function(){
+        clearTimeout(changeMe)
+        console.log("STOPPED")
+    })
+    
+    
+</script>
+</html>
